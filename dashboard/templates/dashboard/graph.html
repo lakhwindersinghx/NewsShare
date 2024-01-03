@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>News</title>
+</head>
+<body>
+    <div class="wrapper container">
+        <div class="row justify-content-center">
+            <div class="col-6" >
+              {% for x in chart%}
+              
+              <div class="card overflow-hidden" style="width: 18rem;">
+                <form action="{%url 'read-later' %}" method='post'>
+                {% csrf_token %}
+                <div class="card-body">
+                  <h5 class="card-title">{{x.title}}</h5>
+              
+                  <a href="{{x.link}}" class="btn btn-primary">See The Full News</a>
+                  <br>
+                  <br>
+                  <input  name="link" id="" hidden value='{{x.link}}'>
+                  <input  name="title" id="" hidden value='{{x.title}}'>
+                  
+                  <button name='read' value='read' type ="submit"class='btn btn-danger btn-sm fa fa-book'> Read later</button>
+                  <button name='like' value='like' type ="submit"class='btn btn-danger btn-sm fa fa-thumbs-up'> Like</button>
+                </div>
+              </div>
+            </form>
+              <hr>
+              {%endfor%}
+            
+    
+                {% comment %} <img src="data:image/png;base64,{{ chart }}">
+            <a  class='btn btn-lg btn-info'href="{% url 'dashboard'%}">Back</a> {% endcomment %}
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+</html>
